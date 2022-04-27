@@ -48,8 +48,8 @@ app.post('/interactions', async function (req, res) {
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {
-            // Hardcoding URL in for now
-            content: "https://untilitsnotfun.com/posts/2022-04-22"
+            // Setting URL as env variable for now
+            content: `https://untilitsnotfun.com/posts/${process.env.LATEST_POST}`
           },
         });
     }
@@ -65,8 +65,8 @@ app.post('/webhooks', async function (req, res) {
   const subject = email.subject;
   const issueNumber = email.secondary_id;
 
-  // Hardcoding URL in for now
-  sendMessageJustSent(subject, issueNumber, 'https://untilitsnotfun.com/posts/2022-04-29')
+  // Setting URL as env variable
+  sendMessageJustSent(subject, issueNumber, `https://untilitsnotfun.com/posts/${process.env.NEXT_POST}`)
 
   return res.end()
 });
