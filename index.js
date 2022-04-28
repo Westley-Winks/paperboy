@@ -45,6 +45,7 @@ app.post('/interactions', async function (req, res) {
         },
       });
     } else if (name === 'latest') {
+      if (!data.options) {
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {
@@ -52,6 +53,15 @@ app.post('/interactions', async function (req, res) {
             content: `https://untilitsnotfun.com/posts/${process.env.LATEST_POST}`
           },
         });
+      } else {
+        return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+            // Setting URL as env variable for now
+            content: `https://untilitsnotfun.com/posts/${process.env.LATEST_POST}/${data.options[0].value}`
+          },
+        });
+      }
     }
   }
 });

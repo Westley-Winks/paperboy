@@ -18,8 +18,8 @@ async function HasGuildCommand(appId, guildId, command) {
     if (data) {
       const installedNames = data.map((c) => c['name']);
       // This is just matching on the name, so it's not good for updates
-      if (!installedNames.includes(command['name'])) {
-        // if (true) {
+      // if (!installedNames.includes(command['name'])) {
+        if (true) {
         console.log(`Installing "${command['name']}"`);
         InstallGuildCommand(appId, guildId, command);
       } else {
@@ -57,7 +57,7 @@ export async function UpdateGuildCommand(appId, guildId, command) {
 // Simple test command
 export const TEST_COMMAND = {
   name: 'test',
-  id: "test",
+  id: 'test',
   description: 'Basic guild command',
   type: 1,
 };
@@ -67,4 +67,24 @@ export const LATEST_COMMAND = {
     id: 'latest',
     description: 'Get link to latest newsletter post',
     type: 1,
+    options: [{
+      name: 'column',
+      description: 'Optionally get a specific column',
+      type: 3,
+      required: false,
+      choices: [
+        {
+          name: 'Popcorn and a Coke',
+          value: '#popcorn-and-a-coke'
+        },
+        {
+          name: 'Tech Shelf',
+          value: '#the-tech-shelf'
+        },
+        {
+          name: 'What We Like',
+          value: '#what-we-like-this-week'
+        }
+      ]
+    }]
 };
